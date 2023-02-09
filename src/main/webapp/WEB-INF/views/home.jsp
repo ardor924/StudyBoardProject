@@ -13,7 +13,7 @@
 <div class="container h-100">
 	<div class="d-flex row justify-content-center align-items-center h-100">
 		<div id="box" class="border text-center d-flex row justify-content-center align-items-center">
-			<a id="title" href="library-main.do">학습용게시판</a>
+			<a id="title" href="board-main.do">학습용게시판</a>
 		</div>
 	</div>
 </div>

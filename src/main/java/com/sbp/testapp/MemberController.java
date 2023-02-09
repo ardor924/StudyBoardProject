@@ -14,17 +14,17 @@ public class MemberController {
 	
 	
 	// 회원가입 페이지 전환
-	@RequestMapping("memberRegisterPage.do")
+	@RequestMapping("/memberRegisterPage.do")
 	public String membeRegisterPage() {
 		
-		return "member/register_page.jsp";
+		return "member/register_page";
 	}
 	
 	// 로그인 페이지 전환
-	@RequestMapping("MemberLoginPage.do")
+	@RequestMapping("/memberLoginPage.do")
 	public String memberLoginPage() {
 		
-		return "member/login_page.jsp";
+		return "member/login_page";
 	}
 	
 	

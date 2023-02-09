@@ -36,4 +36,11 @@ public class HomeController {
 		return "home";
 	}
 	
+	// 게시판 메인 (화면전환용)
+	@RequestMapping("/board-main.do")
+	public String libraryMain(){
+		return "board-main";
+	}
+	
+	
 }
