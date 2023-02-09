@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+<!-- 
+		root-context.xml : 스프링 설정 파일
+		
+		view와 관련되지 않은 객체를 정의(찐 스프링 설정)
+		Service(기능, 비즈니스 로직), DAO(Repository), DB등 비즈니스 로직과 관련된 설정
+-->
+	
+	
+	<!-- 1.datasource 설정: 드라이버 관련-->
+	<!-- Database Connection을 생성 -->
+	<!-- DB 계정 이름과 패스워드 입력 -->
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	  <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+	  <property name="url" value="jdbc:mysql://localhost:3306/StudyBoardProject?serverTimeZone=Asia/Seoul"></property>
+	  <property name="username" value="user"></property>
+	  <property name="password" value="1234"></property>
+	</bean>
+		<!-- !다른방법! -->
+		<!-- DB설정 정보를 따로 빼서 db.properties에 저장할수도 있다 (DB정보를 간편하게 확인및 관리 유지보수에 용의하기 위함) -->
+		<!-- db.properties의 자료는 X-ProjectCars 팀프로젝트의 WEB-INF/Spring 폴더내의 root.xml과 mybatis폴더내의 db.properties참고 -->
+	
+	
+	
+	<!-- 2.sqlSessionFactory 설정-->
+	<!-- classpath: 빌드시 컴파일된 class 파일들의 위치 경로 -->
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="/WEB-INF/mybatis/mybatis-config.xml"/>
+		<!-- <property name="configLocation" value="classpath:/mybatis-config.xml"/> -->
+		<!-- <property name="mapperLocations" value="classpath*:/mappers/*Mapper.xml"/> -->
+	</bean>
+	
+	<!-- 3.mybatis scanner -->	
+	<!-- mybatis scanner가 basePackage에 있는 mapper를 자동으로 scan -->
+	<!-- <mybatis-spring:scan base-package="kr.mr.mapper"/> -->
+	<mybatis-spring:scan base-package="com.sbp.mapper"/>
+	
+	<!-- 4.컴포넌트 scanner -->
+	<!-- 어노테이션관련스캐너, 하지만 정확히 어떻게 쓰이는지 잘 모르겠음... 일시적 보류-->
+	<!-- <context:component-scan base-package="com.study.service"/> -->
+		
+</beans>
